@@ -12,13 +12,9 @@
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	char	*s;
 
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+void	ft_putstr_fd(char *s, int fd)
+{
+	//if (s && fd > 0)
+		write(fd, s, ft_strlen(s));
 }

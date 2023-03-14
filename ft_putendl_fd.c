@@ -12,13 +12,8 @@
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_putendl_fd(char *s, int fd)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

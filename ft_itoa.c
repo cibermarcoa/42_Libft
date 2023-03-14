@@ -9,16 +9,36 @@
 /*   Updated: 2023/03/10 22:10:01 by mdiaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_itoa(int n)
 {
-	char	*s;
+	char	*str;
 
-	s = malloc(nmemb * size);
-	if (!s)
+	str = (char *)malloc(sizeof(char) * 2);
+	if (!str)
 		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	if (n < 0)
+	{
+		str[0] = '-';
+		str[1] = '\0';
+	}
+	else if (n >= 10)
+		str = ft_strjoin(ft_itoa(n / 10), ft_itoa(n % 10));
+	else if (n >= 0 && n < 10)
+	{
+		str[0] = n + '0';
+		str[1] = '\0';
+	}
+	return (str);
 }
+/*
+int main()
+{
+	int i;
+	i = 2345;
+
+	printf("%s", ft_itoa(i));
+	return 0;
+}*/

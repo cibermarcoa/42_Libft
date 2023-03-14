@@ -10,18 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-
-size_t	ft_strlen(const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (src[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -35,11 +24,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	return (ft_strlen(src));
 }
-/*
-int main()
-{
-	char	arr[10] = "asdg";
-	char    aro[10] = "asaaad";
-	printf("%ld", ft_strlcpy(arr, aro, 0));
-	return (0);
-}*/

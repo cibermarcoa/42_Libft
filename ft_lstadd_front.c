@@ -12,13 +12,10 @@
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }
