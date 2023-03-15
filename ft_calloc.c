@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiaz-ca <mdiaz-ca@student.42madrid.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:33:53 by mdiaz-ca          #+#    #+#             */
-/*   Updated: 2023/03/10 22:10:01 by mdiaz-ca         ###   ########.fr       */
+/*   Updated: 2023/03/15 17:14:41 by mdiaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	char	*s;
 
-	s = malloc(nmemb * size);
+	s = malloc(count * size);
 	if (!s)
 		return (NULL);
-	ft_bzero(s, nmemb * size);
+	ft_bzero(s, count * size);
 	return (s);
 }

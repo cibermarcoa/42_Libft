@@ -1,88 +1,79 @@
-FLAG = -Wall -Wextra -Werror
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: daelee <daelee@student.42seoul.kr>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/03/09 18:24:09 by daelee            #+#    #+#              #
+#    Updated: 2023/03/15 19:21:08 by mdiaz-ca         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = libft.a
 
-SRC = ft_atoi.c \
-	  ft_bzero.c \
-	  ft_isalnum.c \
-	  ft_isalpha.c \
-	  ft_isascii.c \
-	  ft_isdigit.c \
-	  ft_isprint.c \
-	  ft_itoa.c \
-	  ft_memalloc.c \
-	  ft_memccpy.c \
-	  ft_memchr.c \
-	  ft_memcmp.c \
-	  ft_memcpy.c \
-	  ft_memdel.c \
-	  ft_memmove.c \
-	  ft_memset.c \
-	  ft_putchar.c \
-	  ft_putchar_fd.c \
-	  ft_putendl.c \
-	  ft_putendl_fd.c \
-	  ft_putnbr.c \
-	  ft_putnbr_fd.c \
-	  ft_putstr.c \
-	  ft_putstr_fd.c \
-	  ft_strcat.c \
-	  ft_strchr.c \
-	  ft_strclr.c \
-	  ft_strcmp.c \
-	  ft_strcpy.c \
-	  ft_strdel.c \
-	  ft_strdup.c \
-	  ft_strequ.c \
-	  ft_striter.c \
-	  ft_striteri.c \
-	  ft_strjoin.c \
-	  ft_strlcat.c \
-	  ft_strlen.c \
-	  ft_strmap.c \
-	  ft_strmapi.c \
-	  ft_strncat.c \
-	  ft_strncmp.c \
-	  ft_strncpy.c \
-	  ft_strnequ.c \
-	  ft_strnew.c \
-	  ft_strnstr.c \
-	  ft_strrchr.c \
-	  ft_strsplit.c \
-	  ft_strstr.c \
-	  ft_strsub.c \
-	  ft_strtrim.c \
-	  ft_tolower.c \
-	  ft_toupper.c \
-	  ft_lstadd.c \
-	  ft_lstdel.c \
-	  ft_lstdelone.c \
-	  ft_lstiter.c \
-	  ft_lstnew.c \
-	  ft_lstmap.c \
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
+RM = rm -f
+
+FILES =		ft_isalpha \
+			ft_isdigit \
+			ft_isalnum \
+			ft_isascii \
+			ft_isprint \
+			ft_strlen \
+			ft_memset \
+			ft_bzero \
+			ft_memcpy \
+			ft_memmove \
+			ft_strlcpy \
+			ft_strlcat \
+			ft_toupper \
+			ft_tolower \
+			ft_strchr \
+			ft_strrchr \
+			ft_strncmp \
+			ft_memchr \
+			ft_memcmp \
+			ft_strnstr \
+			ft_atoi
+FILES_B = 	ft_lstnew \
+	  		ft_lstadd_front \
+	  		ft_lstsize \
+	  		ft_lstlast \
+	  		ft_lstadd_back \
+	  		ft_lstdelone \
+	  		ft_lstclear \
+	  		ft_lstiter \
+	  		ft_lstmap
+
+SRCS_DIR = ./
+SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+SRCS_B = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES_B)))
+
+OBJS_DIR = ./
+OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+OBJS_B = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES_B)))
 
 
-OBJ = $(SRC:.c=.o)
+.c.o: $(SRCS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(NAME): $(OBJS)
+	$(AR) $@ $^
+
+bonus: $(OBJS_B)
+	$(AR) $(NAME) $^
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@echo "$(NAME) created"
-	@ranlib $(NAME)
-	@echo "$(NAME) indexed"
-
-%.o: %.c
-	@gcc $(FLAG) -c $< -o $@
-
 clean:
-	@rm -f $(OBJ)
-	@echo "OBJ deleted"
+	$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(NAME) deleted"
+	$(RM) $(NAME)
 
-re: fclean all
+re: clean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: bonus all clean fclean re
