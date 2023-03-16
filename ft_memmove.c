@@ -29,3 +29,4 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			*(d++) = *(s++);
 	return (dst);
 }
+

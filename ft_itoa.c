@@ -33,3 +33,9 @@ char	*ft_itoa(int n)
 	}
 	return (str);
 }
+
+int	main()
+{
+	printf("%s", ft_itoa(-10004));
+	return (0);
+}
