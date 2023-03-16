@@ -5,37 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiaz-ca <mdiaz-ca@student.42madrid.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 17:33:53 by mdiaz-ca          #+#    #+#             */
-/*   Updated: 2023/03/15 17:24:35 by mdiaz-ca         ###   ########.fr       */
+/*   Created: 2023/03/16 16:31:27 by mdiaz-ca          #+#    #+#             */
+/*   Updated: 2023/03/16 19:05:19 by mdiaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+size_t	ft_itoa_len(int n)
 {
-	char	*str;
+	size_t	len;
 
-	str = (char *)malloc(sizeof(char) * 2);
-	if (!str)
-		return (NULL);
+	len = 0;
 	if (n < 0)
+		len++;
+	if (n == 0)
+		len++;
+	while (n)
 	{
-		str[0] = '-';
-		str[1] = '\0';
+		n /= 10;
+		len++;
 	}
-	else if (n >= 10)
-		str = ft_strjoin(ft_itoa(n / 10), ft_itoa(n % 10));
-	else if (n >= 0 && n < 10)
-	{
-		str[0] = n + '0';
-		str[1] = '\0';
-	}
+	return (len);
+}
+
+char	*ft_engeniring(char *str)
+{;
 	return (str);
 }
 
-int	main()
-{
-	printf("%s", ft_itoa(-10004));
-	return (0);
+char	*ft_itoa(int n)
+{	
+	size_t		len;
+	char		*str;
+
+	len = ft_itoa_len(n);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	if (n == 0)
+		str[0] = 48;
+	if (n < 0)
+	{
+		str[0] = '-';
+		if (n == -2147483648)
+			return (ft_engeniring(str));
+		n *= -1;
+	}
+	while (n != 0 && len >= 0)
+	{
+		str[len-- - 1] = n % 10 + 48;
+		n /= 10;
+	}
+	return (str);
 }
