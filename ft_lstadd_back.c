@@ -16,8 +16,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*lst_aux;
 
-	if (!lst || !new)
+	if (!(*lst && new))
+	{
+		*lst = new;
 		return ;
+	}
 	lst_aux = ft_lstlast(*lst);
 	new->next = NULL;
 	lst_aux->next = new;
