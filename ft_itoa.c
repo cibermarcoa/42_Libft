@@ -29,11 +29,6 @@ size_t	ft_itoa_len(int n)
 	return (len);
 }
 
-char	*ft_engeniring(char *str)
-{;
-	return (str);
-}
-
 char	*ft_itoa(int n)
 {	
 	size_t		len;
@@ -43,16 +38,17 @@ char	*ft_itoa(int n)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
+	str[len] = '\0';
+	if (n == -2147483648)
+		return (ft_memcpy(str, "-2147483648", 11));
 	if (n == 0)
 		str[0] = 48;
 	if (n < 0)
 	{
 		str[0] = '-';
-		if (n == -2147483648)
-			return (ft_engeniring(str));
 		n *= -1;
 	}
-	while (n != 0 && len >= 0)
+	while (n)
 	{
 		str[len-- - 1] = n % 10 + 48;
 		n /= 10;
