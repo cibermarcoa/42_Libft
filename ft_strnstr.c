@@ -16,14 +16,30 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 
+	if (needle[0] == 0)
+		return ((char *)haystack);
+//	if (ft_strlen(haystack) > len || ft_strlen(needle) <= len || ft_strlen(haystack) < ft_strlen(needle))
+//		return (NULL);
 	i = 0;
-	if (needle == NULL || ft_strlen(needle) == 0)
-		return ((char *)haystack + len);
-	while (i < ft_strlen(needle) + len)
+	while (haystack[i] != '\0' && i < ft_strlen(needle))
 	{
-		if (!ft_strncmp((char *)haystack, needle, len))
-			return ((char *)&haystack[i]);
+		if (ft_strlen(needle) > len)
+		{
+			if (!ft_strncmp((char *)&haystack[i], needle, ft_strlen(needle)))
+				return ((char *)haystack + i);
+		}
+		else
+		{
+			if (!ft_strncmp((char *)&haystack[i], needle, len + 1))
+                                return ((char *)haystack + i);
+		}
 		i++;
 	}
 	return (NULL);
 }
+/*
+int main()
+{
+	printf("%s", ft_strnstr("abcdefgh", "abc", 2));
+	return 0;
+}*/
