@@ -12,10 +12,8 @@
 
 #include "libft.h"
 
-char    **ft_split(char const *s, char c)
+void	ft_alloc(char const *s, char c, char **arr)
 {
-    char    **arr;
-
 	size_t	i;
 	size_t	j;
 	size_t	k;
@@ -23,23 +21,6 @@ char    **ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	k = 0;
-	while (s[i])
-	{
-		if (s[i] != c)
-		{
-			while (s[i] && s[i] != c)
-				i++;
-			j++;
-		}
-		i++;
-	}
-	// if (j == 0 && ft_isascii(s[i - 1]))
-	// 		j++;
-	arr = (char **)malloc(sizeof(char *) * (j + 1));
-	if (!arr)
-		return (NULL);
-	i = 0;
-	j = 0;
 	while (i < ft_strlen(s))
 	{
 		if (s[i] != c)
@@ -55,50 +36,72 @@ char    **ft_split(char const *s, char c)
 		}
 		i++;
 	}
+}
+
+void	ft_cpy(char const *s, char c, char **arr)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	i = 0;
 	j = 0;
 	k = 0;
 	while (i < ft_strlen(s))
 	{
-			if (s[i] != c)
+		if (s[i] != c)
+		{
+			while (s[i] && s[i] != c)
 			{
-					while (s[i] && s[i] != c)
-					{                          
-						arr[j][k] = s[i];
-						//printf("%c", arr[j][k]);
-						i++;
-						k++;
-					}
-				arr[j][k] = '\0';
-				//printf("\n");
-				k = 0;
-				j++;
+				arr[j][k] = s[i];
+				i++;
+				k++;
 			}
-			i++;
+			arr[j][k] = '\0';
+			k = 0;
+			j++;
+		}
+		i++;
 	}
+	arr[j] = NULL;
+}
 
+char	**ft_split(char const *s, char c)
+{
+	char	**arr;
+	size_t	i;
+	size_t	j;
 
-
-
-	    arr[j] = NULL;
-
-	// for (int i = 0; i < j; i++)
-    //     printf("%s\n", arr[i]);
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c)
+		{
+			while (s[i] && s[i] != c)
+				i++;
+			j++;
+		}
+		i++;
+	}
+	arr = (char **)malloc(sizeof(char *) * (j + 1));
+	if (!arr)
+		return (NULL);
+	ft_alloc(s, c, arr);
+	ft_cpy(s, c, arr);
 	return (arr);
 }
 
-// int	main(void)
-// {
-// 	char **split;
-// 	split = ft_split("", 'z');
-// 	int	i = 0;
-// 	int	j = 0;
-// 	printf("%s", split[0]);
-// 	while (split[i])
-// 	{
-// 		printf("%s\n", split[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+#include <mcheck.h>
+int	main(void)
+{
+	char	**tab = ft_split("chinimala", ' ');
+	mcheck(tab, 2 * (sizeof(char *)));
+		printf("egual");
+	
+	printf("%lu\n", (sizeof(char *) * 2));
+	printf("%lu\n", (sizeof(*tab)));
+	printf("%s\n", tab);
+
+	return (0);
+}
