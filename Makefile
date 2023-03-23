@@ -59,7 +59,8 @@ FILES_B = 	ft_lstnew \
 	  		ft_lstdelone \
 	  		ft_lstclear \
 	  		ft_lstiter \
-	  		ft_lstmap
+			ft_lstmap
+	  		
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
