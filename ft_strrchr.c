@@ -18,14 +18,14 @@ char	*ft_strrchr(const char *s, int c)
 	char	*chr;
 
 	i = 0;
-	chr = 0;
+	chr = NULL;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == (c % 256))
 			chr = (char *)(s + i);
 		i++;
 	}
-	if (s[i] == c)
+	if (s[i] == (c % 256))
 		chr = (char *)(s + i);
 	return (chr);
 }
