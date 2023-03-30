@@ -12,96 +12,96 @@
 
 #include "libft.h"
 
-void	ft_alloc(char const *s, char c, char **arr)
+static char		**ft_malloc_error(char **result)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	size_t		idx2;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	while (i < ft_strlen(s))
+	idx2 = 0;
+	while (result[idx2])
 	{
-		if (s[i] != c)
-		{
-			while (s[i] && s[i] != c)
-			{
-				i++;
-				k++;
-			}
-			arr[j] = (char *)malloc(sizeof(char) * (k + 1));
-			k = 0;
-			j++;
-		}
-		i++;
+		free(result[idx2]);
+		result[idx2] = NULL;
+		idx2++;
 	}
+	free(result);
+	return (NULL);
 }
 
-void	ft_cpy(char const *s, char c, char **arr)
+static size_t	ft_word_break(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	size_t		idx1;
+	size_t		n_break;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	while (i < ft_strlen(s))
+	idx1 = 0;
+	n_break = 0;
+	while (s[idx1])
 	{
-		if (s[i] != c)
+		if (s[idx1] == c)
+			idx1++;
+		else
 		{
-			while (s[i] && s[i] != c)
-			{
-				arr[j][k] = s[i];
-				i++;
-				k++;
-			}
-			arr[j][k] = '\0';
-			k = 0;
-			j++;
+			n_break++;
+			while (s[idx1] && s[idx1] != c)
+				idx1++;
 		}
-		i++;
 	}
-	arr[j] = NULL;
+	return (n_break);
 }
 
-char	**ft_split(char const *s, char c)
+static char		*ft_word_cpy(char *word, size_t word_len,
+					char const *s, int pre_idx1)
 {
-	char	**arr;
-	size_t	i;
-	size_t	j;
+	size_t		idx3;
 
-	i = 0;
-	j = 0;
-	while (s[i] != '\0')
+	idx3 = 0;
+	while (idx3 < word_len)
 	{
-		if (s[i] != c)
-		{
-			while (s[i] && s[i] != c)
-				i++;
-			j++;
-		}
-		i++;
+		word[idx3] = s[pre_idx1 + idx3];
+		idx3++;
 	}
-	arr = (char **)malloc(sizeof(char *) * (j + 1));
-	if (!arr)
+	word[idx3] = '\0';
+	return (word);
+}
+
+static char		**ft_word_malloc(char **result,
+				size_t n_break, char const *s, char c)
+{
+	size_t		idx2;
+	size_t		idx1;
+	size_t		pre_idx1;
+	size_t		word_len;
+
+	idx2 = 0;
+	idx1 = 0;
+	word_len = 0;
+	while (s[idx1] && idx2 < n_break)
+	{
+		while (s[idx1] && s[idx1] == c)
+			idx1++;
+		pre_idx1 = idx1;
+		while (s[idx1] && s[idx1++] != c)
+			word_len++;
+		if (!(result[idx2] = (char *)malloc(sizeof(char) * (word_len + 1))))
+			return (ft_malloc_error(result));
+		ft_word_cpy(result[idx2], word_len, s, pre_idx1);
+		word_len = 0;
+		idx2++;
+	}
+	result[idx2] = 0;
+	return (result);
+}
+
+char			**ft_split(char const *s, char c)
+{
+	size_t		n_break;
+	char		**result;
+
+	if (s == NULL)
 		return (NULL);
-	ft_alloc(s, c, arr);
-	ft_cpy(s, c, arr);
-	return (arr);
-}
-
-#include <mcheck.h>
-int	main(void)
-{
-	char	**tab = ft_split("chinimala", ' ');
-	mcheck(tab, 2 * (sizeof(char *)));
-		printf("egual");
-	
-	printf("%lu\n", (sizeof(char *) * 2));
-	printf("%lu\n", (sizeof(*tab)));
-	printf("%s\n", tab);
-
-	return (0);
+	n_break = ft_word_break(s, c);
+	if (!(result = (char **)malloc(sizeof(char *) * (n_break + 1))))
+		return (NULL);
+	result[n_break] = NULL;
+	ft_word_malloc(result, n_break, s, c);
+	return (result);
 }
