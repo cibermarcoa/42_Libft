@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_alloc(char const *s, char c, char **arr)
+void	ft_alloc(char const *s, char c, char **arr)
 {
 	size_t	i;
 	size_t	j;
@@ -23,23 +23,19 @@ size_t	ft_alloc(char const *s, char c, char **arr)
 	k = 0;
 	while (i < ft_strlen(s))
 	{
-		if (s[i] != c && s[i])
+		if (s[i] != c)
 		{
-			
-			while (s[i] != c && s[i])
+			while (s[i] && s[i] != c)
 			{
 				i++;
 				k++;
-			}			
-			arr[j] = malloc(sizeof(char) * (k + 1));
-			if (!arr[j])
-				return (0);
+			}
+			arr[j] = (char *)malloc(sizeof(char) * (k + 1));
 			k = 0;
 			j++;
 		}
 		i++;
 	}
-	return (1);
 }
 
 void	ft_cpy(char const *s, char c, char **arr)
@@ -77,39 +73,35 @@ char	**ft_split(char const *s, char c)
 	size_t	j;
 
 	i = 0;
-	j = 1;
+	j = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
+		if (s[i] != c)
 		{
-			i++;
 			while (s[i] && s[i] != c)
 				i++;
-			if (s[i] == c && s[i - 1] != c)
-				j++;
+			j++;
 		}
 		i++;
 	}
-	arr = malloc(sizeof(char *) * (j + 1));
+	arr = (char **)malloc(sizeof(char *) * (j + 1));
 	if (!arr)
 		return (NULL);
-	//free(arr);
-	if (!ft_alloc(s, c, arr))
-		return (NULL);
+	ft_alloc(s, c, arr);
 	ft_cpy(s, c, arr);
 	return (arr);
 }
-/*
+
 #include <mcheck.h>
 int	main(void)
 {
-	char	**tab = ft_split("hello!", ' ');
-	//for(int i = 0; i < 1; i++)
-	 //	printf("%s\n", tab[0]);
-	// printf("%lu\n", (sizeof(char *) * 2));
-	// printf("%lu\n", (sizeof(tab)));
-//	printf("%s\n", tab);
+	char	**tab = ft_split("chinimala", ' ');
+	mcheck(tab, 2 * (sizeof(char *)));
+		printf("egual");
+	
+	printf("%lu\n", (sizeof(char *) * 2));
+	printf("%lu\n", (sizeof(*tab)));
+	printf("%s\n", tab);
 
 	return (0);
 }
-*/
