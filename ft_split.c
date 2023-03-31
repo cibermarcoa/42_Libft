@@ -3,105 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdiaz-ca <mdiaz-ca@student.42madrid.fr>    +#+  +:+       +#+        */
+/*   By: mdiaz-ca <mdiaz-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:33:53 by mdiaz-ca          #+#    #+#             */
-/*   Updated: 2023/03/15 18:54:59 by mdiaz-ca         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:10:52 by mdiaz-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		**ft_malloc_error(char **result)
+static size_t	ft_end(char const *s, char c)
 {
-	size_t		idx2;
+	size_t	i;
+	size_t	end;
 
-	idx2 = 0;
-	while (result[idx2])
+	i = 0;
+	end = 0;
+	while (s[i])
 	{
-		free(result[idx2]);
-		result[idx2] = NULL;
-		idx2++;
+		if (s[i] == c)
+			i++;
+		else
+		{
+			while (s[i] && s[i] != c)
+				i++;
+			end++;
+		}
 	}
-	free(result);
+	return (end);
+}
+
+static char	**ft_freemem(char **str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		str[i] = NULL;
+		i++;
+	}
+	free(str);
 	return (NULL);
 }
 
-static size_t	ft_word_break(char const *s, char c)
+static char	*ft_cpy(char *word, size_t len,
+					char const *s, int start)
 {
-	size_t		idx1;
-	size_t		n_break;
+	size_t	i;
 
-	idx1 = 0;
-	n_break = 0;
-	while (s[idx1])
+	i = 0;
+	while (i < len)
 	{
-		if (s[idx1] == c)
-			idx1++;
-		else
-		{
-			n_break++;
-			while (s[idx1] && s[idx1] != c)
-				idx1++;
-		}
+		word[i] = s[start + i];
+		i++;
 	}
-	return (n_break);
-}
-
-static char		*ft_word_cpy(char *word, size_t word_len,
-					char const *s, int pre_idx1)
-{
-	size_t		idx3;
-
-	idx3 = 0;
-	while (idx3 < word_len)
-	{
-		word[idx3] = s[pre_idx1 + idx3];
-		idx3++;
-	}
-	word[idx3] = '\0';
+	word[i] = '\0';
 	return (word);
 }
 
-static char		**ft_word_malloc(char **result,
-				size_t n_break, char const *s, char c)
+static char	**ft_word_malloc(char **str,
+				size_t end, char const *s, char c)
 {
-	size_t		idx2;
-	size_t		idx1;
-	size_t		pre_idx1;
-	size_t		word_len;
+	size_t	i;
+	size_t	j;
+	size_t	start;
+	size_t	len;
 
-	idx2 = 0;
-	idx1 = 0;
-	word_len = 0;
-	while (s[idx1] && idx2 < n_break)
+	j = 0;
+	i = 0;
+	len = 0;
+	while (s[i] && j < end)
 	{
-		while (s[idx1] && s[idx1] == c)
-			idx1++;
-		pre_idx1 = idx1;
-		while (s[idx1] && s[idx1++] != c)
-			word_len++;
-		if (!(result[idx2] = (char *)malloc(sizeof(char) * (word_len + 1))))
-			return (ft_malloc_error(result));
-		ft_word_cpy(result[idx2], word_len, s, pre_idx1);
-		word_len = 0;
-		idx2++;
+		while (s[i] && s[i] == c)
+			i++;
+		start = i;
+		while (s[i] && s[i++] != c)
+			len++;
+		str[j] = (char *)malloc(sizeof(char) * (len + 1));
+		if (str[j] == 0)
+			return (ft_freemem(str));
+		ft_cpy(str[j], len, s, start);
+		len = 0;
+		j++;
 	}
-	result[idx2] = 0;
-	return (result);
+	str[j] = 0;
+	return (str);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	size_t		n_break;
-	char		**result;
+	size_t	end;
+	char	**str;
 
 	if (s == NULL)
 		return (NULL);
-	n_break = ft_word_break(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * (n_break + 1))))
+	end = ft_end(s, c);
+	str = (char **)malloc(sizeof(char *) * (end + 1));
+	if (!str)
 		return (NULL);
-	result[n_break] = NULL;
-	ft_word_malloc(result, n_break, s, c);
-	return (result);
+	str[end] = NULL;
+	ft_word_malloc(str, end, s, c);
+	return (str);
 }
