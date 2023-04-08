@@ -24,28 +24,28 @@ int main(void)
 ## List of functions
 | Libc functions | Additional functions | Bonus functions |
 | - | - | - |
-| [ft_isalpha](ft_isalpha.c) | [ft_substr](#ft_substr) | [ft_lstnew](#ft_lstnew) |
-| [ft_isdigit](#ft_isalpha) | [ft_strjoin](#ft_strjoin) | [ft_lstadd_front](#ft_lstadd_front) |
-| [ft_isascii](#ft_isascii) | [ft_strtrim](#ft_strjoin) | [ft_lstsize](#ft_lstsize) |
-[ft_isprint](#ft_isprint) | [ft_split](#ft_split) | [ft_lstlast](#ft_lstlast) |
-[ft_strlen](#ft_strlen) | [ft_itoa](#ft_itoa) | [ft_lstadd_back](#ft_lstadd_back) |
-| [ft_memset](#ft_memset) | [ft_strmapi](#ft_strmapi) | [ft_lstdelone](#ft_lstdelone) |
-| [ft_bzero](#ft_bzero) | [ft_striteri](#ft_striteri) | [ft_lstclear](#ft_lstclear) |
-| [ft_memcpy](#ft_memcpy) | [ft_putchar_fd](#ft_putchar_fd) | [ft_lstiter](#ft_lstiter) |
-| [ft_memmove](#ft_memmove) | [ft_putstr_fd](#ft_putstr_fd) | [ft_lstmap](#ft_lstmap) |
-| [ft_strlcpy](#ft_strlcpy) | [ft_putendl_fd](#ft_putendl_fd) |
-| [ft_strlcat](#ft_strlcat) | [ft_putnbr_fd](#ft_putnbr_fd) |
-| [ft_toupper](#ft_toupper) |
-| [ft_tolower](#ft_tolower) |
-| [ft_strchr](#ft_strchr) |
-| [ft_strrchr](#ft_strrchr) |
-| [ft_strncmp](#ft_strncmp) |
-| [ft_memchr](#ft_memchr) |
-| [ft_memcmp](#ft_memcmp) |
-| [ft_strnstr](#ft_strnstr) |
-| [ft_atoi](#ft_atoi) |
-| [ft_calloc](#ft_calloc) |
-| [ft_strdup](#ft_strdup) |
+| [ft_isalpha](ft_isalpha.c) | [ft_substr](#ft_substr.c) | [ft_lstnew](#ft_lstnew.c) |
+| [ft_isdigit](#ft_isalpha.c) | [ft_strjoin](#ft_strjoin.c) | [ft_lstadd_front](#ft_lstadd_front.c) |
+| [ft_isascii](#ft_isascii.c) | [ft_strtrim](#ft_strjoin.c) | [ft_lstsize](#ft_lstsize.c) |
+[ft_isprint](#ft_isprint.c) | [ft_split](#ft_split.c) | [ft_lstlast](#ft_lstlast.c) |
+[ft_strlen](#ft_strlen.c) | [ft_itoa](#ft_itoa.c) | [ft_lstadd_back](#ft_lstadd_back.c) |
+| [ft_memset](#ft_memset.c) | [ft_strmapi](#ft_strmapi.c) | [ft_lstdelone](#ft_lstdelone.c) |
+| [ft_bzero](#ft_bzero.c) | [ft_striteri](#ft_striteri.c) | [ft_lstclear](#ft_lstclear.c) |
+| [ft_memcpy](#ft_memcpy.c) | [ft_putchar_fd](#ft_putchar_fd.c) | [ft_lstiter](#ft_lstiter.c) |
+| [ft_memmove](#ft_memmove.c) | [ft_putstr_fd](#ft_putstr_fd.c) | [ft_lstmap](#ft_lstmap.c) |
+| [ft_strlcpy](#ft_strlcpy.c) | [ft_putendl_fd](#ft_putendl_fd.c) |
+| [ft_strlcat](#ft_strlcat.c) | [ft_putnbr_fd](#ft_putnbr_fd.c) |
+| [ft_toupper](#ft_toupper.c) |
+| [ft_tolower](#ft_tolower.c) |
+| [ft_strchr](#ft_strchr.c) |
+| [ft_strrchr](#ft_strrchr.c) |
+| [ft_strncmp](#ft_strncmp.c) |
+| [ft_memchr](#ft_memchr.c) |
+| [ft_memcmp](#ft_memcmp.c) |
+| [ft_strnstr](#ft_strnstr.c) |
+| [ft_atoi](#ft_atoi.c) |
+| [ft_calloc](#ft_calloc.c) |
+| [ft_strdup](#ft_strdup.c) |
 
 ## Result
 - SUCCESS
@@ -56,4 +56,4 @@ int main(void)
 If you find a bug or have an idea for a new feature, feel free to open an issue or a pull request on this repository. Contributions are always welcome!
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](#LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
