@@ -24,7 +24,7 @@ int main(void)
 ## List of functions
 | Libc functions | Additional functions | Bonus functions |
 | - | - | - |
-| [ft_isalpha](ft_isalpha) | [ft_substr](#ft_substr) | [ft_lstnew](#ft_lstnew) |
+| [ft_isalpha](ft_isalpha.c) | [ft_substr](#ft_substr) | [ft_lstnew](#ft_lstnew) |
 | [ft_isdigit](#ft_isalpha) | [ft_strjoin](#ft_strjoin) | [ft_lstadd_front](#ft_lstadd_front) |
 | [ft_isascii](#ft_isascii) | [ft_strtrim](#ft_strjoin) | [ft_lstsize](#ft_lstsize) |
 [ft_isprint](#ft_isprint) | [ft_split](#ft_split) | [ft_lstlast](#ft_lstlast) |
